@@ -9,7 +9,7 @@ Contrairement à la plupart des jeux de données, l’ordre des observations com
 Trois caractéristiques reviennent sans cesse :
 
 - Une **tendance** est une hausse ou une baisse durable des données.
-- La **saisonnalité** est un motif qui se répète avec une période fixe, par exemple chaque année ou chaque semaine.
+- La **saisonnalité** est un motif qui se répète avec une période fixe, par exemple chaque année ou asdchaque semaine.
 - Un **cycle** monte et descend sans période fixe, souvent sur plusieurs années.
 
 ## Les données de ce livre {#sec-data}
