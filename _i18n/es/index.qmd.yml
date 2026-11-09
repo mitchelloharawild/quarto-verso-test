@@ -26,7 +26,8 @@ units:
     source-hash: 00aa0de4
     text-hash: c5024001
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u062e2c
     kind: block
     section: sec-preface
@@ -38,9 +39,10 @@ units:
     kind: block
     section: sec-preface
     source-hash: 5a428bc9
-    text-hash: eabb1bad
-    origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    text-hash: 064b2e23
+    origin: { by: gh:mitchelloharawild, date: 2026-11-09 }
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u72c84b
     kind: block
     section: sec-preface
