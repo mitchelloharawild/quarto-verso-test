@@ -1,5 +1,6 @@
 project:
-  type: quarto-i18n            # the extension's project type: a book plus the i18n post-render hook
+  type: book
+  post-render: node _extensions/quarto-i18n/i18n.mjs hook   # builds the translations on full renders
 
 book:
   title: "Forecasting in Brief"
@@ -38,3 +39,4 @@ translate:
     target: 2
     service: http://localhost:8787   # verso-i18n PR service, run locally for testing
     repo: mitchelloharawild/quarto-verso-test
+    guide: chapters/how-it-works.qmd

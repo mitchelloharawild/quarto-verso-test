@@ -37,7 +37,8 @@ units:
     source-hash: 11114fd4
     text-hash: 1652eee0
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u459485
     kind: block
     section: sec-visualising
@@ -81,6 +82,7 @@ units:
     kind: block
     section: sec-seasonal-plots
     source-hash: 707507af
-    text-hash: 44a1f1b4
-    origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    text-hash: 1299fc97
+    origin: { by: gh:mitchelloharawild, date: 2026-11-09 }
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
