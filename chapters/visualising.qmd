@@ -1,0 +1,48 @@
+# Visualising a time series {#sec-visualising}
+
+The first step in any forecasting task is to plot the data. A time plot shows
+the observations against time and makes the trend and seasonality easy to see.
+
+```{r}
+#| label: fig-passengers
+#| fig-cap: "Monthly international airline passengers, 1949–1960."
+#| message: false
+library(ggplot2)
+
+# Turn the monthly series into a data frame for plotting
+passengers <- data.frame(
+  month = seq(as.Date("1949-01-01"), by = "month", length.out = length(AirPassengers)),
+  count = as.numeric(AirPassengers)
+)
+
+ggplot(passengers, aes(x = month, y = count)) +
+  geom_line(colour = "steelblue") +
+  labs(
+    title = "Airline passengers",
+    x = "Month",
+    y = "Passengers (thousands)"
+  )
+```
+
+@fig-passengers shows a clear upward trend. The seasonal pattern also grows
+with the level of the series: the summer peaks become larger every year.
+
+## Seasonal plots {#sec-seasonal-plots}
+
+A seasonal plot draws each year as a separate line, so that the shape of the
+seasonal pattern is easier to compare from one year to the next.
+
+```{r}
+#| label: fig-seasonal
+#| fig-cap: "Each year of the series drawn as its own line."
+# One line per year, coloured from earliest to latest
+passengers$year <- format(passengers$month, "%Y")
+passengers$month_of_year <- as.integer(format(passengers$month, "%m"))
+
+ggplot(passengers, aes(x = month_of_year, y = count, group = year, colour = year)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:12, labels = month.abb) +
+  labs(x = "Month of the year", y = "Passengers (thousands)", colour = "Year")
+```
+
+July and August are the busiest months in every year of the data.

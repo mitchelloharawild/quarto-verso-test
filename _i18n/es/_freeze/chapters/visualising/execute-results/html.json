@@ -1,0 +1,17 @@
+{
+  "hash": "d5b1b343e015b63399fce95c4eb045a1",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ni18n:\n  lang: es\n  notice: Esta página fue traducida del inglés por IA. Nadie la ha revisado todavía. El 60% se muestra en inglés porque falta la traducción o está desactualizada. [Ver original](../../chapters/visualising.html){.tr-original} · [Revisar esta página](?review=1){.tr-review-toggle}\ninclude-in-header:\n  - text: <meta name=\"robots\" content=\"noindex\">\n---\n\n# Visualizar una serie temporal {#sec-visualising data-tr-id=\"u9381a7\" data-tr-status=\"machine\" data-tr-reviews=\"0\"}\n\n[El primer paso de cualquier tarea de pronóstico es graficar los datos. Un gráfico temporal muestra las observaciones frente al tiempo y hace visibles la tendencia y la estacionalidad.]{.tr data-tr-id=\"uc0165e\" data-tr-status=\"machine\" data-tr-reviews=\"0\"}\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n\n# Convertir la serie mensual en un data frame para graficar\npassengers <- data.frame(\n  month = seq(as.Date(\"1949-01-01\"), by = \"month\", length.out = length(AirPassengers)),\n  count = as.numeric(AirPassengers)\n)\n\nggplot(passengers, aes(x = month, y = count)) +\n  geom_line(colour = \"steelblue\") +\n  labs(\n    title = \"Pasajeros aéreos\",\n    x = \"Mes\",\n    y = \"Pasajeros (miles)\"\n  )\n```\n\n::: {.cell-output-display}\n![Monthly international airline passengers, 1949–1960.](visualising_files/figure-html/fig-passengers-1.png){#fig-passengers width=672}\n:::\n:::\n\n\n[@fig-passengers shows a clear upward trend. The seasonal pattern also grows\nwith the level of the series: the summer peaks become larger every year.]{.tr data-tr-id=\"u459485\" data-tr-status=\"missing\" data-tr-reviews=\"0\" lang=\"en\"}\n\n## Seasonal plots {#sec-seasonal-plots data-tr-id=\"u277ec2\" data-tr-status=\"missing\" data-tr-reviews=\"0\" lang=\"en\"}\n\n[A seasonal plot draws each year as a separate line, so that the shape of the\nseasonal pattern is easier to compare from one year to the next.]{.tr data-tr-id=\"u6e489a\" data-tr-status=\"missing\" data-tr-reviews=\"0\" lang=\"en\"}\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# One line per year, coloured from earliest to latest\npassengers$year <- format(passengers$month, \"%Y\")\npassengers$month_of_year <- as.integer(format(passengers$month, \"%m\"))\n\nggplot(passengers, aes(x = month_of_year, y = count, group = year, colour = year)) +\n  geom_line() +\n  scale_x_continuous(breaks = 1:12, labels = month.abb) +\n  labs(x = \"Month of the year\", y = \"Passengers (thousands)\", colour = \"Year\")\n```\n\n::: {.cell-output-display}\n![Each year of the series drawn as its own line.](visualising_files/figure-html/fig-seasonal-1.png){#fig-seasonal width=672}\n:::\n:::\n\n\n[July and August are the busiest months in every year of the data.]{.tr data-tr-id=\"u0aa05a\" data-tr-status=\"missing\" data-tr-reviews=\"0\" lang=\"en\"}\n",
+    "supporting": [
+      "visualising_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

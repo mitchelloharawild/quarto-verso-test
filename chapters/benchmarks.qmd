@@ -1,0 +1,39 @@
+# Simple forecasting methods {#sec-benchmarks}
+
+Some forecasting methods are extremely simple and yet surprisingly effective.
+They are mostly used as benchmark methods: any new method should do better
+than these before it is worth using.
+
+## Naive and seasonal naive {#sec-naive}
+
+The **naive** method uses the last observation as the forecast for every
+future period. The **seasonal naive** method instead uses the value from the
+same season of the last year, so a forecast for next July is this July's value.
+
+```{r}
+#| label: fig-snaive
+#| fig-cap: "Seasonal naive forecasts for the next two years."
+h <- 24  # forecast horizon in months
+last_year <- tail(as.numeric(AirPassengers), 12)
+
+# Repeat the final year of data to cover the horizon
+forecast_values <- rep(last_year, length.out = h)
+future <- seq(as.Date("1961-01-01"), by = "month", length.out = h)
+
+message(sprintf("Produced %d forecasts from %d observations", h, length(AirPassengers)))
+
+plot(future, forecast_values, type = "l",
+     main = "Seasonal naive forecasts",
+     xlab = "Month", ylab = "Passengers (thousands)")
+```
+
+Because the series has a strong trend, the seasonal naive forecasts in
+@fig-snaive are probably too low. A method that also models the trend would
+do better.
+
+## Measuring uncertainty {#sec-uncertainty}
+
+A single number hides how uncertain a forecast is. A prediction interval gives
+a range in which the future value is expected to lie with a stated
+probability, such as 80% or 95%. Intervals usually become wider as the
+forecast horizon increases, because uncertainty accumulates over time.

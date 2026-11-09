@@ -1,0 +1,19 @@
+# Preface {.unnumbered #sec-preface}
+
+This short book introduces a few ideas from time series forecasting. It is
+also a working demonstration of **quarto-i18n**, a Quarto extension that keeps
+machine translations of a book in step with its English source.
+
+The author writes only the English chapters. Every other language is generated
+by a translator, checked by the tool, and then improved by readers who review
+paragraphs and suggest better wording.
+
+::: {.callout-tip}
+## Try it
+
+Switch to *Français* or *Español* in the sidebar, then choose **Review this
+page** in the notice at the top of a chapter. Each paragraph shows how many
+people have reviewed its translation.
+:::
+
+The material follows the approach of @fpp3, which is freely available online.

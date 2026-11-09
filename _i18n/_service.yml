@@ -1,0 +1,4 @@
+# Sites allowed to send reviews of this repository to the verso-i18n PR
+# service (like giscus.json). Add the published site's origin here.
+origins:
+  - http://localhost:8787

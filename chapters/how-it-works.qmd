@@ -1,0 +1,45 @@
+# How this book is translated {#sec-how-it-works}
+
+This chapter describes what happens between the English source and the
+translated pages you can read in the other languages.
+
+## One source, many languages {#sec-one-source}
+
+The author edits only the English `.qmd` files and `_quarto.yml`. Each
+translated language lives in a set of translation files under `_i18n/`, one
+file per chapter. Every paragraph, caption and code comment is a separate unit
+with its own source text, translation and list of reviewers.
+
+## Translating {#sec-translating}
+
+Running `i18n translate` collects the units that are new or whose English text
+has changed. A translator fills them in, and the tool checks every result
+before it is accepted. Inline code, links, citations, cross-references and
+shortcodes must come back unchanged, and translated code must parse with R's
+own parser.
+
+## Keeping translations honest {#sec-honest}
+
+When a paragraph changes in English, its translation becomes *stale*. Readers
+then see the English paragraph, marked as such, until the unit is translated
+again. A translation is never silently wrong.
+
+In code cells, only comments and display strings such as plot titles are
+translated. Variable names and data never change, so every language runs the
+same analysis. If a translated cell fails, the build uses the English cell.
+
+## Reviewing {#sec-reviewing}
+
+Choose **Review this page** in the notice to turn on reviewer mode. Each
+paragraph is marked by the number of people who have reviewed it. Select a
+paragraph to see the English source, then approve the translation or suggest
+a better one. Your changes are collected and submitted together as a pull
+request.
+
+::: {.callout-important}
+## Pull requests in this demo
+
+This demo uses a local mock of the pull request service. It runs the same
+checks as the real service and saves each pull request on disk instead of
+opening it on GitHub.
+:::

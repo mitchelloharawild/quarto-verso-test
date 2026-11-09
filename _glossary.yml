@@ -1,0 +1,36 @@
+# Technical terms with one agreed translation per language (02 §6).
+time-series:
+  term: time series
+  variants: [time-series]
+  definition: >
+    A sequence of observations of the same quantity recorded at regular
+    points in time.
+forecast:
+  term: forecast
+  variants: [forecasts, forecasting]
+  definition: A statement about the likely future value of a time series.
+seasonality:
+  term: seasonality
+  variants: [seasonal pattern, seasonal patterns]
+  definition: >
+    A pattern that repeats with a fixed and known period, such as each year
+    or each week.
+trend:
+  term: trend
+  variants: [trends]
+  definition: A long-term increase or decrease in the level of a series.
+benchmark-method:
+  term: benchmark method
+  variants: [benchmark methods, benchmarks]
+  definition: >
+    A very simple forecasting method used as a point of comparison for more
+    sophisticated methods.
+prediction-interval:
+  term: prediction interval
+  variants: [prediction intervals]
+  definition: >
+    A range within which a future observation is expected to lie with a
+    stated probability.
+quarto:
+  term: Quarto
+  keep: true
