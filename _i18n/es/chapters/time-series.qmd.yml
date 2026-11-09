@@ -41,10 +41,11 @@ units:
       Unlike most data sets, the order of the observations matters. Each value is
       related to the values before it, and a forecast uses that relationship to say
       something about the future.
-    text: A diferencia de la mayoría de los conjuntos de datos, el orden de las observaciones importa. Cada valor está relacionado con los anteriores, y un pronóstico usa esa relación para decir algo sobre el futuro.
+    text: lalalla
     terms: { forecast: f8e1a953 }
-    origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    origin: { by: gh:mitchelloharawild, date: 2026-11-09 }
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u6f1f16
     kind: block
     section: sec-special

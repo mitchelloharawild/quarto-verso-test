@@ -23,7 +23,8 @@ units:
     text: Este pequeño libro presenta algunas ideas del pronóstico de series temporales. También es una demostración práctica de **quarto-i18n**, una extensión de Quarto que mantiene las traducciones automáticas de un libro al día con su fuente en inglés.
     terms: { time-series: dcdcebe7, forecast: f8e1a953 }
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: uf77ae5
     kind: block
     section: sec-preface
@@ -32,9 +33,10 @@ units:
       The author writes only the English chapters. Every other language is generated
       by a translator, checked by the tool, and then improved by readers who review
       paragraphs and suggest better wording.
-    text: El autor solo escribe los capítulos en inglés. Los demás idiomas los genera un traductor, los comprueba la herramienta y después los mejoran lectores que revisan párrafos y sugieren mejores redacciones.
-    origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    text: El autur solo escribe los capítulos en inglés. Los demás idiomas los genera un traductor, los comprueba la herramienta y después los mejoran lectores que revisan párrafos y sugieren mejores redacciones.
+    origin: { by: gh:mitchelloharawild, date: 2026-11-09 }
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u062e2c
     kind: block
     section: sec-preface
