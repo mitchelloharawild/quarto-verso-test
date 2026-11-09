@@ -38,4 +38,3 @@ translate:
     target: 2
     service: http://localhost:8787   # verso-i18n PR service, run locally for testing
     repo: mitchelloharawild/quarto-verso-test
-  storage: parallel              # translations are translated copies under _i18n/<lang>/
