@@ -1,0 +1,13 @@
+# Préface {.unnumbered #sec-preface}
+
+Ce petit livre présente quelques idées de la prévision des séries temporelles. C’est aussi une démonstration concrète de **quarto-i18n**, une extension Quarto qui maintient les traductions automatiques d’un livre en phase avec sa source anglaise.
+
+L’auteur n’écrit que les chapitres en anglais. Toutes les autres langues sont produites par un traducteur, vérifiées par l’outil, puis améliorées par des lecteurs qui relisent les paragraphes et proposent de meilleures formulations.
+
+::: {.callout-tip}
+## Essayez
+
+Passez à *Français* ou *Español* dans la barre latérale, puis choisissez **Relire cette page** dans l’avis en haut d’un chapitre. Chaque paragraphe indique combien de personnes ont relu sa traduction.
+:::
+
+Le contenu suit l’approche de @fpp3, disponible gratuitement en ligne.

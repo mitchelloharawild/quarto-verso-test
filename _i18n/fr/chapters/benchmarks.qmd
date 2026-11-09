@@ -1,0 +1,30 @@
+# Méthodes de prévision simples {#sec-benchmarks}
+
+Certaines méthodes de prévision sont extrêmement simples et pourtant étonnamment efficaces. Elles servent surtout de méthodes de référence : toute nouvelle méthode doit faire mieux qu’elles avant de valoir la peine d’être utilisée.
+
+## Méthode naïve et méthode naïve saisonnière {#sec-naive}
+
+La méthode **naïve** utilise la dernière observation comme prévision pour toutes les périodes futures. La méthode **naïve saisonnière** utilise plutôt la valeur de la même saison de l’année précédente : la prévision pour juillet prochain est la valeur de juillet dernier.
+
+```{r}
+#| label: fig-snaive
+#| fig-cap: "Seasonal naive forecasts for the next two years."
+h <- 24  # horizon de prévision en mois
+last_year <- tail(as.numeric(AirPassengers), 12)
+
+# Répéter la dernière année de données pour couvrir l’horizon
+forecast_values <- rep(last_year, length.out = h)
+future <- seq(as.Date("1961-01-01"), by = "month", length.out = h)
+
+message(sprintf("%d prévisions produites à partir de %d observations", h, length(AirPassengers)))
+
+plot(future, forecast_values, type = "l",
+     main = "Prévisions naïves saisonnières",
+     xlab = "Mois", ylab = "Passagers (milliers)")
+```
+
+Comme la série présente une forte tendance, les prévisions naïves saisonnières de la @fig-snaive sont probablement trop basses. Une méthode qui modélise aussi la tendance ferait mieux.
+
+## Mesurer l’incertitude {#sec-uncertainty}
+
+Un seul nombre masque l’incertitude d’une prévision. Un intervalle de prédiction donne une plage dans laquelle la valeur future devrait se trouver avec une probabilité donnée, par exemple 80 % ou 95 %. Les intervalles s’élargissent généralement à mesure que l’horizon de prévision augmente.

@@ -1,0 +1,27 @@
+# Comment ce livre est traduit {#sec-how-it-works}
+
+Ce chapitre décrit ce qui se passe entre la source anglaise et les pages traduites que vous pouvez lire dans les autres langues.
+
+## Une source, plusieurs langues {#sec-one-source}
+
+L’auteur ne modifie que les fichiers `.qmd` en anglais et `_quarto.yml`. Chaque langue traduite vit dans un ensemble de fichiers de traduction sous `_i18n/`, un fichier par chapitre. Chaque paragraphe, légende et commentaire de code est une unité distincte, avec son propre texte source, sa traduction et sa liste de relecteurs.
+
+## Traduire {#sec-translating}
+
+La commande `i18n translate` rassemble les unités nouvelles ou dont le texte anglais a changé. Un traducteur les complète, et l’outil vérifie chaque résultat avant de l’accepter. Le code en ligne, les liens, les citations, les renvois et les shortcodes doivent revenir inchangés, et le code traduit doit être analysable par l’analyseur de R lui-même.
+
+## Des traductions honnêtes {#sec-honest}
+
+Quand un paragraphe change en anglais, sa traduction devient *périmée*. Les lecteurs voient alors le paragraphe anglais, signalé comme tel, jusqu’à ce que l’unité soit retraduite. Une traduction n’est jamais fausse en silence.
+
+Dans les cellules de code, seuls les commentaires et les chaînes affichées, comme les titres de graphiques, sont traduits. Les noms de variables et les données ne changent jamais, si bien que chaque langue exécute la même analyse. Si une cellule traduite échoue, la compilation utilise la cellule anglaise.
+
+## Relire {#sec-reviewing}
+
+Choisissez **Relire cette page** dans l’avis pour activer le mode relecture. Chaque paragraphe est marqué selon le nombre de personnes qui l’ont relu. Sélectionnez un paragraphe pour voir la source anglaise, puis approuvez la traduction ou proposez-en une meilleure. Vos modifications sont regroupées et soumises ensemble sous forme de pull request.
+
+::: {.callout-important}
+## Les pull requests dans cette démo
+
+Cette démo utilise une imitation locale du service de pull requests. Elle exécute les mêmes vérifications que le vrai service et enregistre chaque pull request sur le disque au lieu de l’ouvrir sur GitHub.
+:::

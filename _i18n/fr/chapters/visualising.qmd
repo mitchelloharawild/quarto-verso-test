@@ -1,0 +1,45 @@
+# Visualiser une série temporelle {#sec-visualising}
+
+La première étape de toute prévision consiste à représenter les données. Un chronogramme montre les observations en fonction du temps et fait clairement apparaître la tendance et la saisonnalité.
+
+```{r}
+#| label: fig-passengers
+#| fig-cap: "Monthly international airline passengers, 1949–1960."
+#| message: false
+library(ggplot2)
+
+# Transformer la série mensuelle en data frame pour le graphique
+passengers <- data.frame(
+  month = seq(as.Date("1949-01-01"), by = "month", length.out = length(AirPassengers)),
+  count = as.numeric(AirPassengers)
+)
+
+ggplot(passengers, aes(x = month, y = count)) +
+  geom_line(colour = "steelblue") +
+  labs(
+    title = "Passagers aériens",
+    x = "Mois",
+    y = "Passagers (milliers)"
+  )
+```
+
+La @fig-passengers montre une nette tendance à la hausse. Le motif saisonnier croît aussi avec le niveau de la série : les pics estivaux s’amplifient chaque année.
+
+## Graphiques saisonniers {#sec-seasonal-plots}
+
+Un graphique saisonnier trace chaque année comme une ligne distincte, ce qui permet de comparer plus facilement la forme du motif saisonnier d’une année à l’autre.
+
+```{r}
+#| label: fig-seasonal
+#| fig-cap: "Each year of the series drawn as its own line."
+# Une ligne par année, colorée de la plus ancienne à la plus récente
+passengers$year <- format(passengers$month, "%Y")
+passengers$month_of_year <- as.integer(format(passengers$month, "%m"))
+
+ggplot(passengers, aes(x = month_of_year, y = count, group = year, colour = year)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:12, labels = month.abb) +
+  labs(x = "Mois de l’année", y = "Passagers (milliers)", colour = "Année")
+```
+
+Juillet et août sont les mois les plus chargés de chaque année des données.

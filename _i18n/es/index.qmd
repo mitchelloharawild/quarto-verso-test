@@ -1,0 +1,13 @@
+# Prefacio {.unnumbered #sec-preface}
+
+Este pequeño libro presenta algunas ideas del pronóstico de series temporales. También es una demostración práctica de **quarto-i18n**, una extensión de Quarto que mantiene las traducciones automáticas de un libro al día con su fuente en inglés.
+
+El autor solo escribe los capítulos en inglés. Los demás idiomas los genera un traductor, los comprueba la herramienta y después los mejoran lectores que revisan párrafos y sugieren mejores redacciones.
+
+::: {.callout-tip}
+## Pruébalo
+
+Cambia a *Français* o *Español* en la barra lateral y elige **Revisar esta página** en el aviso de la parte superior de un capítulo. Cada párrafo muestra cuántas personas han revisado su traducción.
+:::
+
+El material sigue el enfoque de @fpp3, disponible gratuitamente en línea.

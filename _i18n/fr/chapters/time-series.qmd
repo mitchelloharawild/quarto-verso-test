@@ -1,0 +1,25 @@
+# Données de séries temporelles {#sec-time-series}
+
+Une série temporelle est une suite d’observations d’une même grandeur, relevées à intervalles réguliers. Le nombre mensuel de passagers aériens, la demande quotidienne d’électricité et le taux de chômage trimestriel sont tous des séries temporelles.
+
+## Ce qui rend une série particulière {#sec-special}
+
+Contrairement à la plupart des jeux de données, l’ordre des observations compte. Chaque valeur est liée aux valeurs qui la précèdent, et une prévision s’appuie sur cette relation pour dire quelque chose de l’avenir.
+
+Trois caractéristiques reviennent sans cesse :
+
+- Une **tendance** est une hausse ou une baisse durable des données.
+- La **saisonnalité** est un motif qui se répète avec une période fixe, par exemple chaque année ou chaque semaine.
+- Un **cycle** monte et descend sans période fixe, souvent sur plusieurs années.
+
+## Les données de ce livre {#sec-data}
+
+La plupart des exemples utilisent `AirPassengers`, un jeu de données classique fourni avec R. Il recense le nombre de passagers aériens internationaux chaque mois de 1949 à 1960, en milliers. La série compte `{r} length(AirPassengers)` observations.[^passengers]
+
+[^passengers]: Ces données ont été publiées par Box et Jenkins et servent souvent à illustrer une saisonnalité multiplicative.
+
+::: {.callout-note}
+## Fréquence
+
+La fréquence d’une série est le nombre d’observations dans une période saisonnière. Les données mensuelles ont une fréquence de 12.
+:::

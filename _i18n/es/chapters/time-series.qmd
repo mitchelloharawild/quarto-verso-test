@@ -1,0 +1,25 @@
+# Datos de series temporales {#sec-time-series}
+
+Una serie temporal es una sucesión de observaciones de una misma magnitud, registradas a intervalos regulares. El número mensual de pasajeros aéreos, la demanda diaria de electricidad y la tasa de desempleo trimestral son series temporales.
+
+## Qué hace especial a una serie {#sec-special}
+
+A diferencia de la mayoría de los conjuntos de datos, el orden de las observaciones importa. Cada valor está relacionado con los anteriores, y un pronóstico usa esa relación para decir algo sobre el futuro.
+
+Hay tres características que aparecen una y otra vez:
+
+- Una **tendencia** es un aumento o una disminución a largo plazo de los datos.
+- La **estacionalidad** es un patrón que se repite con un periodo fijo, por ejemplo cada año o cada semana.
+- Un **ciclo** sube y baja sin un periodo fijo, a menudo a lo largo de varios años.
+
+## Los datos de este libro {#sec-data}
+
+La mayoría de los ejemplos usan `AirPassengers`, un conjunto de datos clásico que viene con R. Registra el número de pasajeros aéreos internacionales de cada mes entre 1949 y 1960, en miles. La serie tiene `{r} length(AirPassengers)` observaciones.[^passengers]
+
+[^passengers]: Box y Jenkins publicaron estos datos, que a menudo se usan para ilustrar una estacionalidad multiplicativa.
+
+::: {.callout-note}
+## Frecuencia
+
+La frecuencia de una serie es el número de observaciones en un periodo estacional. Los datos mensuales tienen una frecuencia de 12.
+:::
