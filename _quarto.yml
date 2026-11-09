@@ -38,3 +38,4 @@ translate:
     target: 2
     service: http://localhost:8787   # verso-i18n PR service, run locally for testing
     repo: mitchelloharawild/quarto-verso-test
+    guide: chapters/how-it-works.qmd
