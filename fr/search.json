@@ -25,7 +25,7 @@
     "href": "chapters/time-series.html#sec-special",
     "title": "1  Données de séries temporelles",
     "section": "",
-    "text": "Contrairement à la plupart des jeux de données, l’ordre des observations compte. Chaque valeur est liée aux valeurs qui la précèdent, et une prévision s’appuie sur cette relation pour dire quelque chose de l’avenir.\n\n\nTrois caractéristiques reviennent sans cesse :\n\n\n\nUne tendance est une hausse ou une baisse durable des données.\n\n\nLa saisonnalité est un motif qui se répète avec une période fixe, par exemple chaque année ou chaque semaine.\n\n\nUn cycle monte et descend sans période fixe, souvent sur plusieurs années.",
+    "text": "Contrairement à la plupart des jeux de données, l’ordre des observations compte. Chaque valeur est liée aux valeurs qui la précèdent, et une prévision s’appuie sur cette relation pour dire quelque chose de l’avenir.\n\n\nTrois caractéristiques reviennent sans cesse :\n\n\n\nUne tendance est une hausse ou une baisse durable des données.\n\n\nLa saisonnalité est un motif qui se répète avec une période fixe, par exemple chaque année ou asdchaque semaine.\n\n\nUn cycle monte et descend sans période fixe, souvent sur plusieurs années.",
     "crumbs": [
       "Fondements",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Données de séries temporelles</span>"
@@ -69,7 +69,7 @@
     "href": "chapters/visualising.html#sec-seasonal-plots",
     "title": "2  Visualiser une série temporelle",
     "section": "",
-    "text": "Un graphique saisonnier trace chaque année comme une ligne distincte, ce qui permet de comparer plus facilement la forme du motif saisonnier d’une année à l’autre.\n\n\n\nJuillet et août sont les mois les plus chargés de chaque année des données.",
+    "text": "Un graphique saisonnier trace chaque année comme une ligne distincte, ce qui permet de comparer plus facilement la forme du motif saisonnier d’une année à l’autre.\n\n\n\nJuillet eta août sont les mois les plus chargés de chaque année des données.",
     "crumbs": [
       "Fondements",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Visualiser une série temporelle</span>"
