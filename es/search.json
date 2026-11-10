@@ -1,0 +1,161 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pronósticos en breve",
+    "section": "",
+    "text": "Prefacio\n\n\nEste pequeño libro presenta algunas ideas del pronóstico de series temporales. También es una demostración práctica de quarto-i18n, una extensión de Quarto que mantiene las traducciones automáticas de un libro al día con su fuente en inglés.\n\n\nEl autor solo escribe los capítulos en inglés. Los demás idiomas los genera un traductor, los comprueba la herramienta y después los mejoran lectores que revisan párrafos y sugieren mejores redacciones.\n\n\n\n\n\n\n\nTipPruébalo\n\n\n\n\nCambia a Français o Español en la barra lateral y elige Revisar esta página en el aviso de la parte superior de un capítulo. Cada párrafo muestra cuántas personas han revisado su traducción.\n\n\n\n\nEl material sigue el enfoque de Hyndman y Athanasopoulos (2021), disponible gratuitamente en línea.\n\n\n\n\n\nHyndman, Rob J., y George Athanasopoulos. 2021. Forecasting: Principles and Practice. 3rd ed. OTexts. https://otexts.com/fpp3/.",
+    "crumbs": [
+      "Prefacio"
+    ]
+  },
+  {
+    "objectID": "chapters/time-series.html",
+    "href": "chapters/time-series.html",
+    "title": "1  Datos de series temporales",
+    "section": "",
+    "text": "1.1 Qué hace especial a una serie",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Datos de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/time-series.html#sec-special",
+    "href": "chapters/time-series.html#sec-special",
+    "title": "1  Datos de series temporales",
+    "section": "",
+    "text": "A diferencia de la mayoría de los conjuntos de datos, el orden de las observaciones importa. Cada valor está relacionado con los anteriores, y un pronóstico usa esa relación para decir algo sobre el futuro.\n\n\nHay tres características que aparecen una y otra vez:\n\n\n\nUna tendencia es un aumento o una disminución a largo plazo de los datos.\n\n\nLa estacionalidad es un patrón que se repite con un periodo fijo, por ejemplo cada año o cada semana.\n\n\nUn ciclo sube y baja sin un periodo fijo, a menudo a lo largo de varios años.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Datos de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/time-series.html#sec-data",
+    "href": "chapters/time-series.html#sec-data",
+    "title": "1  Datos de series temporales",
+    "section": "1.2 Los datos de este libro",
+    "text": "1.2 Los datos de este libro\n\nLa mayoría de los ejemplos usan AirPassengers, un conjunto de datos clásico que viene con R. Registra el número de pasajeros aéreos internacionales de cada mes entre 1949 y 1960, en miles. La serie tiene {r} length(AirPassengers) observaciones.1\n\n\n\n\n\n\n\nNotaFrecuencia\n\n\n\n\nLa frecuencia de una serie es el número de observaciones en un periodo estacional. Los datos mensuales tienen una frecuencia de 12.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Datos de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/time-series.html#footnotes",
+    "href": "chapters/time-series.html#footnotes",
+    "title": "1  Datos de series temporales",
+    "section": "",
+    "text": "Box y Jenkins publicaron estos datos, que a menudo se usan para ilustrar una estacionalidad multiplicativa.\n\n↩︎",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Datos de series temporales</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/visualising.html",
+    "href": "chapters/visualising.html",
+    "title": "2  Visualizar una serie temporal",
+    "section": "",
+    "text": "2.1 Seasonal plots\n# One line per year, coloured from earliest to latest\npassengers$year &lt;- format(passengers$month, \"%Y\")\npassengers$month_of_year &lt;- as.integer(format(passengers$month, \"%m\"))\n\nggplot(passengers, aes(x = month_of_year, y = count, group = year, colour = year)) +\n  geom_line() +\n  scale_x_continuous(breaks = 1:12, labels = month.abb) +\n  labs(x = \"Month of the year\", y = \"Passengers (thousands)\", colour = \"Year\")\n\n\n\n\n\n\n\nFigura 2.2: Each year of the series drawn as its own line.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Visualizar una serie temporal</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/visualising.html#sec-seasonal-plots",
+    "href": "chapters/visualising.html#sec-seasonal-plots",
+    "title": "2  Visualizar una serie temporal",
+    "section": "",
+    "text": "A seasonal plot draws each year as a separate line, so that the shape of the seasonal pattern is easier to compare from one year to the next.\n\n\n\nJuly and August are the busiest months in every year of the data.",
+    "crumbs": [
+      "Fundamentos",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Visualizar una serie temporal</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/benchmarks.html",
+    "href": "chapters/benchmarks.html",
+    "title": "3  Simple forecasting methods",
+    "section": "",
+    "text": "3.1 Naive and seasonal naive\nh &lt;- 24  # forecast horizon in months\nlast_year &lt;- tail(as.numeric(AirPassengers), 12)\n\n# Repeat the final year of data to cover the horizon\nforecast_values &lt;- rep(last_year, length.out = h)\nfuture &lt;- seq(as.Date(\"1961-01-01\"), by = \"month\", length.out = h)\n\nmessage(sprintf(\"Produced %d forecasts from %d observations\", h, length(AirPassengers)))\n\nProduced 24 forecasts from 144 observations\n\nplot(future, forecast_values, type = \"l\",\n     main = \"Seasonal naive forecasts\",\n     xlab = \"Month\", ylab = \"Passengers (thousands)\")\n\n\n\n\n\n\n\nFigura 3.1: Seasonal naive forecasts for the next two years.",
+    "crumbs": [
+      "Métodos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simple forecasting methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/benchmarks.html#sec-naive",
+    "href": "chapters/benchmarks.html#sec-naive",
+    "title": "3  Simple forecasting methods",
+    "section": "",
+    "text": "The naive method uses the last observation as the forecast for every future period. The seasonal naive method instead uses the value from the same season of the last year, so a forecast for next July is this July’s value.\n\n\n\nBecause the series has a strong trend, the seasonal naive forecasts in Figura 3.1 are probably too low. A method that also models the trend would do better.",
+    "crumbs": [
+      "Métodos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simple forecasting methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/benchmarks.html#sec-uncertainty",
+    "href": "chapters/benchmarks.html#sec-uncertainty",
+    "title": "3  Simple forecasting methods",
+    "section": "3.2 Measuring uncertainty",
+    "text": "3.2 Measuring uncertainty\n\nA single number hides how uncertain a forecast is. A prediction interval gives a range in which the future value is expected to lie with a stated probability, such as 80% or 95%. Intervals usually become wider as the forecast horizon increases, because uncertainty accumulates over time.",
+    "crumbs": [
+      "Métodos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Simple forecasting methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/how-it-works.html",
+    "href": "chapters/how-it-works.html",
+    "title": "4  How this book is translated",
+    "section": "",
+    "text": "4.1 One source, many languages",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How this book is translated</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/how-it-works.html#sec-one-source",
+    "href": "chapters/how-it-works.html#sec-one-source",
+    "title": "4  How this book is translated",
+    "section": "",
+    "text": "The author edits only the English .qmd files and _quarto.yml. Each translated language lives in a set of translation files under _i18n/, one file per chapter. Every paragraph, caption and code comment is a separate unit with its own source text, translation and list of reviewers.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How this book is translated</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/how-it-works.html#sec-translating",
+    "href": "chapters/how-it-works.html#sec-translating",
+    "title": "4  How this book is translated",
+    "section": "4.2 Translating",
+    "text": "4.2 Translating\n\nRunning i18n translate collects the units that are new or whose English text has changed. A translator fills them in, and the tool checks every result before it is accepted. Inline code, links, citations, cross-references and shortcodes must come back unchanged, and translated code must parse with R’s own parser.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How this book is translated</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/how-it-works.html#sec-honest",
+    "href": "chapters/how-it-works.html#sec-honest",
+    "title": "4  How this book is translated",
+    "section": "4.3 Keeping translations honest",
+    "text": "4.3 Keeping translations honest\n\nWhen a paragraph changes in English, its translation becomes stale. Readers then see the English paragraph, marked as such, until the unit is translated again. A translation is never silently wrong.\n\n\nIn code cells, only comments and display strings such as plot titles are translated. Variable names and data never change, so every language runs the same analysis. If a translated cell fails, the build uses the English cell.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How this book is translated</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/how-it-works.html#sec-reviewing",
+    "href": "chapters/how-it-works.html#sec-reviewing",
+    "title": "4  How this book is translated",
+    "section": "4.4 Reviewing",
+    "text": "4.4 Reviewing\n\nChoose Review this page in the notice to turn on reviewer mode. Each paragraph is marked by the number of people who have reviewed it. Select a paragraph to see the English source, then approve the translation or suggest a better one. Your changes are collected and submitted together as a pull request.\n\n\n\n\n\n\n\nImportantePull requests in this demo\n\n\n\n\nThis demo uses a local mock of the pull request service. It runs the same checks as the real service and saves each pull request on disk instead of opening it on GitHub.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How this book is translated</span>"
+    ]
+  }
+]
