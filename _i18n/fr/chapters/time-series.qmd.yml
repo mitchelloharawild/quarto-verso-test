@@ -42,6 +42,7 @@ units:
     reviews:
       - { by: gh:alice, date: 2026-11-09 }
       - { by: gh:bob, date: 2026-11-09 }
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u6f1f16
     kind: block
     section: sec-special
@@ -64,10 +65,11 @@ units:
     kind: block
     section: sec-special
     source-hash: 6fe7bac4
-    text-hash: f8f020bf
+    text-hash: 78c22b0b
     terms: { seasonality: f7e669fa }
-    origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    origin: { by: gh:mitchelloharawild, date: 2026-11-09 }
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-09 }
   - id: u6b625e
     kind: block
     section: sec-special

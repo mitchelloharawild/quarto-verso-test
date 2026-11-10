@@ -42,4 +42,4 @@ ggplot(passengers, aes(x = month_of_year, y = count, group = year, colour = year
   labs(x = "Mois de l’année", y = "Passagers (milliers)", colour = "Année")
 ```
 
-Juillet et août sont les mois les plus chargés de chaque année des données.
+Juillet eta août sont les mois les plus chargés de chaque année des données.

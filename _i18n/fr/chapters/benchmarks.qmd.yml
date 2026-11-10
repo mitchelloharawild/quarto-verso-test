@@ -20,7 +20,8 @@ units:
     text-hash: 1dcd785f
     terms: { forecast: dd8922d9, benchmark-method: 69083cbd }
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-10 }
   - id: u3fd307
     kind: block
     section: sec-naive
@@ -35,7 +36,8 @@ units:
     text-hash: a42b80b6
     terms: { forecast: dd8922d9 }
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-10 }
   - id: ub3f3d2
     kind: caption
     section: sec-naive
@@ -51,7 +53,8 @@ units:
     text-hash: a475d309
     terms: { forecast: dd8922d9 }
     origin: { by: llm, model: claude-code/claude-opus-5-5, date: 2026-11-09 }
-    reviews: []
+    reviews:
+      - { by: gh:mitchelloharawild, date: 2026-11-10 }
   - id: ua8630e
     kind: block
     section: sec-naive
