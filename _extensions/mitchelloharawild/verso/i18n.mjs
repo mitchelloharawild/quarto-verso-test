@@ -7392,6 +7392,10 @@ function quartoBin() {
 }
 function pandocCommand() {
   const q = quartoBin();
+  if (q === "quarto") {
+    const pd = which("pandoc");
+    if (pd) return { cmd: pd, args: [] };
+  }
   try {
     const real = fs.realpathSync(q);
     const p = path.join(path.dirname(real), "tools", process.platform === "win32" ? "pandoc.exe" : "pandoc");
@@ -9045,6 +9049,7 @@ function extensionDir() {
 }
 var PROJECT_FILE = "_quarto.yml";
 var CONFIG_KEY = "verso-translate";
+var DEFAULT_SERVICE = "https://verso.nectric.com.au";
 var DEFAULT_OUTPUT = { book: "_book", website: "_site", manuscript: "_manuscript" };
 var PROJECT_TFILE = "_project.yml";
 var Project = class {
@@ -9052,7 +9057,6 @@ var Project = class {
   config;
   tc;
   md;
-  extDir;
   unitCache = /* @__PURE__ */ new Map();
   historyCache = /* @__PURE__ */ new Map();
   constructor(root) {
@@ -9063,13 +9067,13 @@ var Project = class {
     const tc = this.config[CONFIG_KEY];
     if (!tc || !tc.source || !Array.isArray(tc.targets)) throw new Error(`${PROJECT_FILE}: ${CONFIG_KEY}.source and ${CONFIG_KEY}.targets are required`);
     this.tc = tc;
-    this.extDir = extensionDir();
     this.md = pandocMarkdown();
   }
-  /**
-   * The Quarto project type (book, website, manuscript, default, ...). The
-   * extension adds no type of its own; the legacy `quarto-i18n` type was a book.
-   */
+  /** The installed extension (needed to build; the PR service never asks). */
+  get extDir() {
+    return extensionDir();
+  }
+  /** The Quarto project type (the legacy `quarto-i18n` type is a book). */
   get type() {
     const t = this.config.project?.type;
     if (typeof t === "string" && t !== "quarto-i18n") return t;
@@ -9083,6 +9087,12 @@ var Project = class {
   }
   get i18nDir() {
     return path2.join(this.root, "_i18n");
+  }
+  /** The PR service URL, or null when submissions are off. */
+  get reviewService() {
+    const s = this.tc.review?.service;
+    if (s === false || !this.tc.review?.repo) return null;
+    return typeof s === "string" && s ? s : DEFAULT_SERVICE;
   }
   get reviewTarget() {
     return this.tc.review?.target ?? 2;
@@ -9122,10 +9132,7 @@ var Project = class {
   rel(abs) {
     return path2.relative(this.root, abs).split(path2.sep).join("/");
   }
-  /**
-   * The files that hold a translation, relative to the root: the translated
-   * document and its tracking file, or the project file's translation file.
-   */
+  /** The files that hold a translation, relative to the root. */
   storedPaths(lang, file) {
     const track = this.rel(this.tfilePath(lang, file));
     return file === PROJECT_FILE ? [track] : [this.rel(this.docPath(lang, file)), track];
@@ -9134,11 +9141,7 @@ var Project = class {
     const p = path2.join(this.root, rel2);
     return fs2.existsSync(p) ? fs2.readFileSync(p, "utf8") : void 0;
   };
-  /**
-   * The translation of one document as stored, from disk or from another
-   * version of the files (`get`, e.g. a PR branch). For a document, also how
-   * the translated copy was read.
-   */
+  /** The stored translation of a document, from disk or from `get` (e.g. a PR branch). */
   async loadTFile(lang, file, get = this.disk) {
     const paths = this.storedPaths(lang, file);
     const track = paths[paths.length - 1];
@@ -9162,11 +9165,7 @@ var Project = class {
     const w = writeDoc(t.source, this.readSource(t.source), units, t, raw);
     return { [paths[0]]: w.doc, [paths[1]]: stringifyTrack(w.track, path2.posix.basename(paths[0])) };
   }
-  /**
-   * Write a translation. A translated document whose structure no longer
-   * matches its tracking file is never overwritten (its translations could not
-   * be carried over) unless `reset` is set.
-   */
+  /** Write a translation; a document out of step with its tracking file needs `reset`. */
   async saveTFile(t, raw, opts = {}) {
     if (t.source !== PROJECT_FILE && !opts.reset) {
       const cur = await this.loadTFile(t.lang, t.source);
@@ -9217,10 +9216,7 @@ var Project = class {
     if (doc) await this.recoverSources(file, synced);
     return { file, units, synced, tfile, issues, doc };
   }
-  /**
-   * Tracking files keep no source text; stale translations get their old source
-   * back from git history (for retranslation and `on-stale: previous`).
-   */
+  /** The old source of stale translations, from git history. */
   async recoverSources(file, synced) {
     const need = synced.filter((u) => u.status === "stale" && u.stored?.text && u.stored.source === void 0);
     if (!need.length) return;
@@ -9435,7 +9431,7 @@ ${lines.slice(-15).join("\n")}`);
       guide: guideHref(p.tc.review?.guide, page),
       repo,
       dir: p.tc.review?.dir ?? "",
-      service: p.tc.review?.service ?? null,
+      service: p.reviewService,
       target: p.reviewTarget,
       strings: S,
       stats: statsOf.get(st.file),
