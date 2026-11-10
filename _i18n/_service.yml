@@ -2,4 +2,5 @@
 # service. The localhost entry is for `quarto preview --port 4200`.
 origins:
   - https://mitchelloharawild.github.io
+  - https://pkg.mitchelloharawild.com
   - http://localhost:4200
